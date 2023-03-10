@@ -2,8 +2,16 @@ import java.io.*;
 import java.util.Scanner;
 
 public class GestorNotas {
+
+    /**
+     * La ruta del archivo.
+     */
     private static String path;
 
+    /**
+     * El main donde se ejecuta el programa.
+     * @param args Los argumentos.
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Scanner scL = new Scanner(System.in);
@@ -46,6 +54,14 @@ public class GestorNotas {
         } while (opcion != 0);
     }
 
+    /**
+     * Escribir una nota de un estudiante concreto indicando su id y su nota.
+     * @param sc El scanner.
+     * @throws IOException                    Si no se puede acceder al fichero.
+     * @throws NumberFormatException          Si el id no es un número.
+     * @throws ArrayIndexOutOfBoundsException Si no se pasan los argumentos correctos.
+     * @throws FileNotFoundException          Si no se encuentra el fichero.
+     */
     private static void write(Scanner sc) {
         System.out.println("Introduce el id: ");
         int id = sc.nextInt();
@@ -59,6 +75,14 @@ public class GestorNotas {
         }
     }
 
+    /**
+     * Lee una nota de un estudiante concreto indicando su id.
+     * @param sc El scanner.
+     * @throws IOException                    Si no se puede acceder al fichero.
+     * @throws NumberFormatException          Si el id no es un número.
+     * @throws ArrayIndexOutOfBoundsException Si no se pasan los argumentos correctos.
+     * @throws FileNotFoundException          Si no se encuentra el fichero.
+     */
     private static void read(Scanner sc) {
         System.out.println("Introduce el id: ");
         int id = sc.nextInt();
@@ -70,6 +94,14 @@ public class GestorNotas {
         }
     }
 
+    /**
+     * Modifica una nota de un estudiante concreto indicando su id y su nota.
+     * @param sc El scanner.
+     * @throws IOException                    Si no se puede acceder al fichero.
+     * @throws NumberFormatException          Si el id no es un número.
+     * @throws ArrayIndexOutOfBoundsException Si no se pasan los argumentos correctos.
+     * @throws FileNotFoundException          Si no se encuentra el fichero.
+     */
     private static void modify(Scanner sc) {
         System.out.println("Introduce el id: ");
         int id = sc.nextInt();
@@ -83,6 +115,14 @@ public class GestorNotas {
         }
     }
 
+    /**
+     * Elimina una nota de un estudiante concreto indicando su id.
+     * @param sc El scanner.
+     * @throws IOException                    Si no se puede acceder al fichero.
+     * @throws NumberFormatException          Si el id no es un número.
+     * @throws ArrayIndexOutOfBoundsException Si no se pasan los argumentos correctos.
+     * @throws FileNotFoundException          Si no se encuentra el fichero.
+     */
     private static void delete(Scanner sc) {
         System.out.println("Introduce el id: ");
         int id = sc.nextInt();
@@ -94,10 +134,17 @@ public class GestorNotas {
         }
     }
 
+    /**
+     * Genera 100 ids y notas aleatorias.
+     * @throws IOException                    Si no se puede acceder al fichero.
+     * @throws NumberFormatException          Si el id no es un número.
+     * @throws ArrayIndexOutOfBoundsException Si no se pasan los argumentos correctos.
+     * @throws FileNotFoundException          Si no se encuentra el fichero.
+     */
     private static void random100() {
         for (int i = 0; i < 100; i++) {
             int id = (int) (Math.random() * 100 + 1);
-            double nota = (double) Math.round(Math.random() * 1000)/100;
+            double nota = (double) Math.round(Math.random() * 1000) / 100;
             try {
                 Process p = Runtime.getRuntime().exec("java -jar Gestor.jar w " + path + " " + id + " " + nota);
                 flujoDatos(p);
@@ -107,6 +154,13 @@ public class GestorNotas {
         }
     }
 
+    /**
+     * Lee todas las notas.
+     * @throws IOException                    Si no se puede acceder al fichero.
+     * @throws NumberFormatException          Si el id no es un número.
+     * @throws ArrayIndexOutOfBoundsException Si no se pasan los argumentos correctos.
+     * @throws FileNotFoundException          Si no se encuentra el fichero.
+     */
     private static void readAll() {
         try {
             Process p = Runtime.getRuntime().exec("java -jar Gestor.jar r " + path + " -1");
@@ -116,6 +170,11 @@ public class GestorNotas {
         }
     }
 
+    /**
+     * Lee el flujo de datos del proceso con InputStream y BufferedReader.
+     * @param p El proceso.
+     * @throws IOException Si no se puede acceder al fichero.
+     */
     private static void flujoDatos(Process p) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(p.getInputStream()));
         String line;
