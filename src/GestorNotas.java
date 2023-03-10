@@ -2,10 +2,14 @@ import java.io.*;
 import java.util.Scanner;
 
 public class GestorNotas {
+    private static String path;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Scanner scL = new Scanner(System.in);
         int opcion = 0;
+        System.out.println("Introduce el nombre del fichero: ");
+        path = scL.nextLine();
         do {
             System.out.println("1.Escribir una nota");
             System.out.println("2.Leer una nota");
@@ -48,7 +52,7 @@ public class GestorNotas {
         System.out.println("Introduce la nota: ");
         double nota = Double.parseDouble(sc.next());
         try {
-            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar w notas.txt " + id + " " + nota);
+            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar w " + path + " " + id + " " + nota);
             flujoDatos(p);
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,7 +63,7 @@ public class GestorNotas {
         System.out.println("Introduce el id: ");
         int id = sc.nextInt();
         try {
-            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar r notas.txt " + id);
+            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar r " + path + " " + id);
             flujoDatos(p);
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,7 +76,7 @@ public class GestorNotas {
         System.out.println("Introduce la nota: ");
         double nota = Double.parseDouble(sc.next());
         try {
-            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar m notas.txt " + id + " " + nota);
+            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar m " + path + " " + id + " " + nota);
             flujoDatos(p);
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +87,7 @@ public class GestorNotas {
         System.out.println("Introduce el id: ");
         int id = sc.nextInt();
         try {
-            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar d notas.txt " + id);
+            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar d " + path + " " + id);
             flujoDatos(p);
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +99,7 @@ public class GestorNotas {
             int id = (int) (Math.random() * 100 + 1);
             double nota = (double) Math.round(Math.random() * 1000)/100;
             try {
-                Process p = Runtime.getRuntime().exec("java -jar Gestor.jar w notas.txt " + id + " " + nota);
+                Process p = Runtime.getRuntime().exec("java -jar Gestor.jar w " + path + " " + id + " " + nota);
                 flujoDatos(p);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -105,7 +109,7 @@ public class GestorNotas {
 
     private static void readAll() {
         try {
-            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar r notas.txt -1");
+            Process p = Runtime.getRuntime().exec("java -jar Gestor.jar r " + path + " -1");
             flujoDatos(p);
         } catch (Exception e) {
             e.printStackTrace();
