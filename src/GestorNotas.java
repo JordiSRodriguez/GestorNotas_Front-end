@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class GestorNotas {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Scanner scL = new Scanner(System.in);
         int opcion = 0;
         do {
             System.out.println("1.Escribir una nota");
